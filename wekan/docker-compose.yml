@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+
+  mongodb:
+    image: mongo
+    restart: on-failure
+    command: mongod --smallfiles --oplogSize 128
+    expose:
+      - "27017"
+    volumes:
+      - "/var/docker/wekan/mongodb/data:/data/db"
+      - "/var/docker/wekan/mongodb/dump:/dump"
+    networks:
+      - internal
+
+  wekan:
+    image: wekanteam/wekan
+    restart: on-failure
+    depends_on:
+      - mongodb
+    ports:
+      - 3004:80
+    environment:
+      - MONGO_URL=mongodb://mongodb:27017/wekan
+      - ROOT_URL=http://sbvirapp451:3004
+    depends_on:
+      - mongodb
+    networks:
+      - internal
+
+networks:
+    internal:
+      driver: bridge
