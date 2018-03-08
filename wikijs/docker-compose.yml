@@ -40,4 +40,4 @@ networks:
       driver: bridge
     gogs:
       external:
-        name: gogs_internal      
+        name: gogs_internal
