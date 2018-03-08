@@ -6,7 +6,7 @@ services:
     image: influxdb
     restart: on-failure
     expose:
-      - 8086
+      - "8086"
     environment:
       INFLUXDB_DB: cadvisor     
     volumes:
@@ -18,7 +18,7 @@ services:
     image: google/cadvisor
     restart: on-failure
     ports:
-      - 3000:8080
+      - "3000:8080"
     hostname: '{{.Node.Hostname}}'
     command: -logtostderr -docker_only -storage_driver=influxdb -storage_driver_db=cadvisor -storage_driver_host=influxdb:8086
     volumes:
@@ -34,7 +34,7 @@ services:
   chronograf:
     image: chronograf
     ports:
-      - 3001:8888
+      - "3001:8888"
     volumes:
       - /var/docker/monitoring/chronograf/data:/var/lib/chronograf
     depends_on:
@@ -46,7 +46,7 @@ services:
     image: grafana/grafana
     restart: on-failure
     ports:
-      - 3002:3000
+      - "3002:3000"
     volumes:
       - /var/docker/monitoring/grafana/data:/var/lib/grafana
     depends_on:
