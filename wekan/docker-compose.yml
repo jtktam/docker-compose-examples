@@ -20,12 +20,10 @@ services:
     depends_on:
       - mongodb
     ports:
-      - 3004:80
+      - "3004:80"
     environment:
-      - MONGO_URL=mongodb://mongodb:27017/wekan
-      - ROOT_URL=http://sbvirapp451:3004
-    depends_on:
-      - mongodb
+      - "MONGO_URL=mongodb://mongodb:27017/wekan"
+      - "ROOT_URL=http://sbvirapp451:3004"
     networks:
       - internal
 
