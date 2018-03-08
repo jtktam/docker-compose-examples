@@ -22,7 +22,7 @@ services:
     depends_on:
       - gogsdb
     ports:
-      - "3000:3003"
+      - "3003:3000"
       - "2222:22"
     volumes:
       - /var/docker/gogs/app/data:/data
