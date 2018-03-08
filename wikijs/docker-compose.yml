@@ -2,15 +2,15 @@ version: '3'
 
 services:
 
-  mongodb:
+  wikidb:
     image: mongo
     restart: on-failure
     command: mongod --smallfiles --oplogSize 128
     expose:
       - "27017"
     volumes:
-      - "/var/docker/wikijs/mongodb/data:/data/db"
-      - "/var/docker/wikijs/mongodb/dump:/dump"
+      - /var/docker/wikijs/mongodb/data:/data/db
+      - /var/docker/wikijs/mongodb/dump:/dump
     networks:
       - internal
 
@@ -18,19 +18,19 @@ services:
     image: requarks/wiki
     restart: on-failure
     depends_on:
-      - mongodb
+      - wikidb
     ports:
       - "3005:80"
     environment:
       WIKI_JS_HEROKU: 1
       WIKI_ADMIN_EMAIL: joseph2.tam@sunnybrook.ca
     volumes:
-      - "/var/docker/wikijs/wikijs/logs:/logs"
-      - "/var/docker/wikijs/wikijs/data:/var/www/wiki/data"
-      - "/var/docker/wikijs/wikijs/repo:/var/www/wiki/repo"
-      - "/var/docker/wikijs/wikijs/keys:/etc/wiki/keys"
-      - "./id_rsa.pem:/etc/wiki/keys/id_rsa.pem"
-      - "./config.yml:/var/wiki/config.yml"
+      - /var/docker/wikijs/wikijs/logs:/logs
+      - /var/docker/wikijs/wikijs/data:/var/www/wiki/data
+      - /var/docker/wikijs/wikijs/repo:/var/www/wiki/repo
+      - /var/docker/wikijs/wikijs/keys:/etc/wiki/keys
+      - ./id_rsa.pem:/etc/wiki/keys/id_rsa.pem
+      - ./config.yml:/var/wiki/config.yml
     networks:
       - internal
       - gogs
