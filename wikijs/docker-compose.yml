@@ -20,14 +20,20 @@ services:
     depends_on:
       - mongodb
     ports:
-      - "3005:3000"
+      - "3005:80"
     environment:
-      - "WIKI_ADMIN_EMAIL: joseph2.tam@sunnybrook.ca"
+      WIKI_JS_HEROKU: 1
+      WIKI_ADMIN_EMAIL: email@company.com
     volumes:
-      - "/var/docker/wijijs/wikijs/config.yml:/var/wiki/config.yml"
+      - "/var/docker/wikijs/wikijs/logs:/logs"
+      - "/var/docker/wikijs/wikijs/data:/var/www/wiki/data"
+      - "/var/docker/wikijs/wikijs/repo:/var/www/wiki/repo"
+      - "/var/docker/wikijs/wikijs/keys:/etc/wiki/keys"
+      - "./config.yml:/var/wiki/config.yml"
     networks:
       - internal
 
 networks:
     internal:
       driver: bridge
+
