@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+
+  mongodb:
+    image: mongo
+    restart: on-failure
+    command: mongod --smallfiles --oplogSize 128
+    expose:
+      - "27017"
+    volumes:
+      - "/var/docker/wikijs/mongodb/data:/data/db"
+      - "/var/docker/wikijs/mongodb/dump:/dump"
+    networks:
+      - internal
+
+  wikijs:
+    image: requarks/wiki
+    restart: on-failure
+    depends_on:
+      - mongodb
+    ports:
+      - "3005:3000"
+    environment:
+      - "WIKI_ADMIN_EMAIL: joseph2.tam@sunnybrook.ca"
+    volumes:
+      - "/var/docker/wijijs/wikijs/config.yml:/var/wiki/config.yml"
+    networks:
+      - internal
+
+networks:
+    internal:
+      driver: bridge
