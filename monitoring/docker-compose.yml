@@ -20,7 +20,7 @@ services:
     ports:
       - "3000:8080"
     hostname: '{{.Node.Hostname}}'
-    command: -logtostderr -docker_only -storage_driver=influxdb -storage_driver_db=cadvisor -storage_driver_host=influxdb:8086
+    command: -logtostderr -docker_only -storage_driver=influxdb -storage_driver_db=cadvisor -storage_driver_host=monitoringdb:8086
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:rw
