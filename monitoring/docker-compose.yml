@@ -2,7 +2,7 @@ version: "3"
 
 services:
 
-  influxdb:
+  monitoringdb:
     image: influxdb
     restart: on-failure
     expose:
@@ -27,34 +27,30 @@ services:
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
     depends_on:
-      - influxdb
+      - monitoringdb
     networks:
       - internal
 
   chronograf:
     image: chronograf
-    expose:
-      - 8888
-    environment:
-      BASE_PATH: /chronograf
+    ports:
+      - 3001:8888
     volumes:
       - /var/docker/monitoring/chronograf/data:/var/lib/chronograf
     depends_on:
-      - influxdb
+      - monitoringdb
     networks:
       - internal
       
   grafana:
     image: grafana/grafana
     restart: on-failure
-    expose:
-      - 3000    
-    hostname: '{{.Node.Hostname}}'
+    ports:
+      - 3002:3000
     volumes:
       - /var/docker/monitoring/grafana/data:/var/lib/grafana
-      - /var/docker/monitoring/grafana/grafana.ini:/etc/grafana/grafana.ini
     depends_on:
-      - influxdb
+      - monitoringdb
     networks:
       - internal
 
