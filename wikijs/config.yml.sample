@@ -9,14 +9,14 @@
 # Title of this site
 # ---------------------------------------------------------------------
 
-title: Wiki
+title: MyChart Wiki
 
 # ---------------------------------------------------------------------
 # Full public path to the site, without the trailing slash
 # ---------------------------------------------------------------------
 # INCLUDE CLIENT PORT IF NOT 80/443!
 
-host: http://localhost
+host: http://sbvirapp451:3005
 
 # ---------------------------------------------------------------------
 # Port the main server should listen to (80 by default)
@@ -39,7 +39,7 @@ paths:
 # In megabytes (MB)
 
 uploads:
-  maxImageFileSize: 3
+  maxImageFileSize: 5
   maxOtherFileSize: 100
 
 # ---------------------------------------------------------------------
@@ -62,87 +62,34 @@ auth:
   defaultReadAccess: false
   local:
     enabled: true
-  google:
-    enabled: true
-    clientId: GOOGLE_CLIENT_ID
-    clientSecret: GOOGLE_CLIENT_SECRET
-  microsoft:
-    enabled: true
-    clientId: MS_APP_ID
-    clientSecret: MS_APP_SECRET
-  facebook:
-    enabled: false
-    clientId: FACEBOOK_APP_ID
-    clientSecret: FACEBOOK_APP_SECRET
-  github:
-    enabled: false
-    clientId: GITHUB_CLIENT_ID
-    clientSecret: GITHUB_CLIENT_SECRET
-  slack:
-    enabled: false
-    clientId: 'SLACK_CLIENT_ID'
-    clientSecret: 'SLACK_CLIENT_SECRET'
-  ldap:
-    enabled: false
-    url: ldap://serverhost:389
-    bindDn: cn='root'
-    bindCredentials: BIND_PASSWORD
-    searchBase: o=users,o=example.com
-    searchFilter: (uid={{username}})
-    tlsEnabled: false
-    tlsCertPath: C:\example\root_ca_cert.crt
-  azure:
-    enabled: false
-    clientId: APP_ID
-    clientSecret: APP_SECRET_KEY
-    resource: '00000002-0000-0000-c000-000000000000'
-    tenant: 'YOUR_TENANT.onmicrosoft.com'
-  oauth2:
-    enabled: false
-    clientId: OAUTH2_CLIENT_ID
-    clientSecret: OAUTH2_CLIENT_SECRET
-    authorizationURL: OAUTH2_AUTH_URL
-    tokenURL: OAUTH2_TOKEN_URL
 
 # ---------------------------------------------------------------------
 # Secret key to use when encrypting sessions
 # ---------------------------------------------------------------------
 # Use a long and unique random string (256-bit keys are perfect!)
 
-sessionSecret: 1234567890abcdefghijklmnopqrstuvxyz
+sessionSecret: JAq|Ao^1<wWEed;YnfvCCdF3:MT$W[aGvz)|-%'=Z$q/j85~AjR0X-@0D`r}-K[
 
 # ---------------------------------------------------------------------
 # Database Connection String
 # ---------------------------------------------------------------------
 
-db: mongodb://localhost:27017/wiki
+db: mongodb://mongodb:27017/wiki
 
 # ---------------------------------------------------------------------
 # Git Connection Info
 # ---------------------------------------------------------------------
 
 git:
-  url: https://github.com/Organization/Repo
+  url: ssh://git@gogs:22/wikijs/wiki.git
   branch: master
   auth:
-
-    # Type: basic or ssh
     type: ssh
-
-    # Only for Basic authentication:
-    username: marty
-    password: MartyMcFly88
-
-    # Only for SSH authentication:
-    privateKey: /etc/wiki/keys/git.pem
-
+    privateKey: /etc/wiki/keys/id_rsa.pem
     sslVerify: true
-
-  # Default email to use as commit author
-  serverEmail: marty@example.com
-
-  # Whether to use user email as author in commits
-  showUserEmail: true
+  signature:
+    name: Wiki.js
+    email: wikijs@mychart.ca
 
 # ---------------------------------------------------------------------
 # Features
@@ -152,17 +99,6 @@ git:
 features:
   linebreaks: true
   mathjax: true
-
-# ---------------------------------------------------------------------
-# External Logging
-# ---------------------------------------------------------------------
-
-externalLogging:
-  bugsnag: false
-  loggly: false
-  papertrail: false
-  rollbar: false
-  sentry: false
 
 # ---------------------------------------------------------------------
 # Color Theme
@@ -176,3 +112,4 @@ theme:
   code:
     dark: true
     colorize: true
+
