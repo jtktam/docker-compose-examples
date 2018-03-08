@@ -2,7 +2,7 @@ version: "3"
 
 services:
 
-  mongodb:
+  wekandb:
     image: mongo
     restart: on-failure
     command: mongod --smallfiles --oplogSize 128
@@ -18,11 +18,11 @@ services:
     image: wekanteam/wekan
     restart: on-failure
     depends_on:
-      - mongodb
+      - wekandb
     ports:
       - "3004:80"
     environment:
-      MONGO_URL: mongodb://mongodb:27017/wekan
+      MONGO_URL: mongodb://wekandb:27017/wekan
       ROOT_URL: http://sbvirapp451:3004
     networks:
       - internal
