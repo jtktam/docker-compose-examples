@@ -9,8 +9,8 @@ services:
     expose:
       - "27017"
     volumes:
-      - "/var/docker/wekan/mongodb/data:/data/db"
-      - "/var/docker/wekan/mongodb/dump:/dump"
+      - /var/docker/wekan/mongodb/data:/data/db
+      - /var/docker/wekan/mongodb/dump:/dump
     networks:
       - internal
 
