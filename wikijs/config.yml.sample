@@ -74,7 +74,7 @@ sessionSecret: JAq|Ao^1<wWEed;YnfvCCdF3:MT$W[aGvz)|-%'=Z$q/j85~AjR0X-@0D`r}-K[
 # Database Connection String
 # ---------------------------------------------------------------------
 
-db: mongodb://mongodb:27017/wiki
+db: mongodb://wikidb:27017/wiki
 
 # ---------------------------------------------------------------------
 # Git Connection Info
