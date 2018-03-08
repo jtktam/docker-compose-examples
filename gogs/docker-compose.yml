@@ -6,7 +6,7 @@ services:
     image: postgres
     restart: on-failure
     expose:
-      - 5432
+      - "5432"
     environment:
       POSTGRES_USER: gogs
       POSTGRES_PASSWORD: gogs
@@ -22,8 +22,8 @@ services:
     depends_on:
       - gogsdb
     ports:
-      - 3000:3003
-      - 2222:22
+      - "3000:3003"
+      - "2222:22"
     volumes:
       - /var/docker/gogs/app/data:/data
     networks:
